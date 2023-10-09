@@ -14,11 +14,15 @@ import homeassistant.helpers.config_validation as cv
 from .const import (
     AUTO_SETUP_YAML,
     CONF_BINARY_SENSOR,
+    CONF_CLOSE_XPATH,
+    CONF_COVER,
     CONF_DIMMABLE,
     CONF_INVERTING,
     CONF_LIGHT,
     CONF_NODE,
+    CONF_OPEN_XPATH,
     CONF_SENSOR,
+    CONF_STATE_XPATH,
     CONF_SWITCH,
     CONF_XPATH,
     DOMAIN,
@@ -80,6 +84,20 @@ AUTO_SETUP_SCHEMA = vol.Schema(
                 )
             ],
         ),
+        vol.Optional(CONF_COVER, default=[]): vol.All(
+            cv.ensure_list,
+            [
+                vol.All(
+                    {
+                        vol.Required(CONF_XPATH): cv.string,
+                        vol.Required(CONF_TYPE): cv.string,
+                        vol.Required(CONF_OPEN_XPATH): cv.string,
+                        vol.Required(CONF_CLOSE_XPATH): cv.string,
+                        vol.Required(CONF_STATE_XPATH): cv.string,
+                    }
+                )
+            ],
+        ),
     }
 )
 
@@ -126,7 +144,7 @@ def get_discovery_info(platform_setup, groups, controller_id):
                     if "setting" in node.attrib and node.attrib["setting"] == "yes":
                         continue
                     ihc_id = int(node.attrib["id"].strip("_"), 0)
-                    name = f"{groupname}_{ihc_id}"
+                    name = f"{groupname} {product.get('position')}"
                     # make the model number look a bit nicer - strip leading _
                     model = product.get("product_identifier", "").lstrip("_")
                     device = {

@@ -20,6 +20,10 @@ CONF_ON_ID = "on_id"
 CONF_POSITION = "position"
 CONF_SENSOR = "sensor"
 CONF_SWITCH = "switch"
+CONF_COVER = "cover"
+CONF_OPEN_XPATH = "open_xpath"
+CONF_CLOSE_XPATH = "close_xpath"
+CONF_STATE_XPATH = "state_xpath"
 CONF_XPATH = "xpath"
 
 DOMAIN = "ihc"
@@ -27,10 +31,11 @@ DOMAIN = "ihc"
 IHC_CONTROLLER = "controller"
 IHC_CONTROLLER_INDEX = "controller_index"
 IHC_PLATFORMS = (
-    Platform.BINARY_SENSOR,
-    Platform.LIGHT,
-    Platform.SENSOR,
-    Platform.SWITCH,
+    # Platform.BINARY_SENSOR,
+    # Platform.LIGHT,
+    # Platform.SENSOR,
+    # Platform.SWITCH,
+    Platform.COVER,
 )
 
 SERVICE_SET_RUNTIME_VALUE_BOOL = "set_runtime_value_bool"

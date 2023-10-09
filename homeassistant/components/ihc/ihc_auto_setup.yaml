@@ -32,6 +32,9 @@ binary_sensor:
   - xpath: './/product_dataline[@product_identifier="_0x2110"]'
     node: "dataline_input"
     type: "light"
+  # push button
+  - xpath: './/product_dataline[@product_identifier="_0x2102"]'
+    node: "dataline_input"
 
 light:
   # Swedish Wireless dimmer (Mobil VU/Dimmer 1-knapp/touch)
@@ -130,3 +133,11 @@ switch:
   # Wireless mobile relay
   - xpath: './/product_airlink[@product_identifier="_0x4204"]'
     node: "airlink_relay"
+
+cover:
+  # Garage Door Function Block
+  - xpath: './/functionblock[@master_name="Port"]'
+    type: "GARAGE"
+    open_xpath: './/resource_input[@name="Open"]'
+    close_xpath: './/resource_input[@name="Close"]'
+    state_xpath: './/resource_enum[@name="Status"]'
